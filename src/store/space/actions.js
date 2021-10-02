@@ -18,8 +18,28 @@ export function fetchSpaces() {
     dispatch(startLoading);
     try {
       const response = await axios.get(`${apiUrl}/spaces`);
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(spacesFetched(response.data));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+
+export const spacesById = (data) => {
+  return {
+    type: "detailsPage/spacesFetched",
+    payload: data,
+  };
+};
+
+export function spaceById(id) {
+  return async (dispatch, getState) => {
+    dispatch(startLoading);
+    try {
+      const response = await axios.get(`${apiUrl}/spaces/${id}`);
+
+      dispatch(spacesById(response.data));
     } catch (e) {
       console.log(e.message);
     }
