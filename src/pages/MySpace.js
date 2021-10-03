@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeStoryById } from "../store/user/actions";
 import { selectMySpace } from "../store/user/selectors";
+import NewStoryForm from "./NewStoryForm";
 
 export default function MySpace() {
   const userSpace = useSelector(selectMySpace);
   const dispatch = useDispatch();
+  const [showForm, setShowForm] = useState(false);
   //   console.log("uswr space", userSpace);
 
   return (
@@ -23,6 +25,22 @@ export default function MySpace() {
           >
             {userSpace.title}
           </h1>
+          <button
+            onClick={() => {
+              setShowForm(!showForm);
+            }}
+            style={{
+              backgroundColor: "blueviolet",
+              padding: "10px",
+              border: "1px, solid, white",
+              color: "white",
+              fontWeight: "bold",
+              boxShadow: "2px 2px 2px gray",
+            }}
+          >
+            Post a cool story, bro!
+          </button>
+          {showForm ? <NewStoryForm /> : null}
           <ul>
             <li style={{ listStyle: "none" }}>
               {userSpace.stories.map((story) => {

@@ -126,3 +126,36 @@ export function removeStoryById(id) {
     }
   };
 }
+
+export const storyPostSuccess = (story) => ({
+  type: "story/created",
+  payload: story,
+});
+export function createNewStory(name, content, imageUrl) {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      const spaceId = getState().user.space.id;
+      const response = await axios.post(
+        `${apiUrl}/stories`,
+        {
+          name,
+          content,
+          imageUrl,
+          spaceId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(storyPostSuccess(response.data));
+      dispatch(
+        showMessageWithTimeout("success", false, "Cool story bro!", 1500)
+      );
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}

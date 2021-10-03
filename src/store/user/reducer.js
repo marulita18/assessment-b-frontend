@@ -28,6 +28,16 @@ export default (state = initialState, action) => {
         space: { ...state.spaces, stories: newStories },
       };
 
+    case "story/created":
+      const newState = {
+        ...state,
+        space: {
+          ...state.space,
+          stories: [...state.space.stories, action.payload],
+        },
+      };
+      return newState;
+
     default:
       return state;
   }
