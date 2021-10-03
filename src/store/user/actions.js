@@ -112,15 +112,14 @@ export const getUserWithStoredToken = () => {
 
 export const storyRemoved = (data) => {
   return {
-    type: "mySpace/storyRemoved",
+    type: "user/storyRemoved",
     payload: data,
   };
 };
 export function removeStoryById(id) {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.delete(`${apiUrl}/myspace/${id}`);
-      console.log("my response", response.data);
+      await axios.delete(`${apiUrl}/stories/${id}`);
       dispatch(storyRemoved(id));
     } catch (e) {
       console.log(e.message);
