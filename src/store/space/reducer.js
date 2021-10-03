@@ -14,20 +14,18 @@ export default function reducer(state = initialState, { type, payload }) {
     }
 
     case "homepage/spacesFetched": {
-      console.log("my action payload", payload);
-
+      // console.log("my action payload", action.payload);
       return {
         ...state,
         loading: false,
-        spaces: payload,
+        spaces: [...payload],
       };
     }
 
     case "detailsPage/spacesFetched": {
-      console.log("my new payload", payload);
       const newState = {
-        ...state,
         loading: false,
+        spaces: payload,
         details: payload,
       };
       console.log("my newstate is", newState);

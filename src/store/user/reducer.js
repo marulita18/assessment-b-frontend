@@ -3,7 +3,7 @@ import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
 const initialState = {
   token: localStorage.getItem("token"),
   name: null,
-  email: null
+  email: null,
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +18,12 @@ export default (state = initialState, action) => {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
+
+    case "mySpace/storyRemoved":
+      console.log("im here", newStories);
+      const newStories = state.space.stories.filter((story) => {
+        return story.id !== action.payload;
+      });
 
     default:
       return state;

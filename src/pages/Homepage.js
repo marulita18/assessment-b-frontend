@@ -17,7 +17,7 @@ export default function Homepage() {
     dispatch(fetchSpaces());
   }, [dispatch]);
 
-  console.log("spaces", spaces);
+  // console.log("spaces", spaces);
   return (
     <div>
       {loading ? "Loading, please wait" : null}
